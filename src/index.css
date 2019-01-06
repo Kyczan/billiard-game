@@ -1,0 +1,11 @@
+body {
+  background-color: #f9f8f6;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0c090a;
+}
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+}
