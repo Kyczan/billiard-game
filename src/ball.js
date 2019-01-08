@@ -1,7 +1,5 @@
-import context from './context';
+import Context from './context';
 import { BALL_RAD } from './constants';
-
-const ctx = context();
 
 class Ball {
   constructor(x = 0, y = 0, color = 'white') {
@@ -10,6 +8,7 @@ class Ball {
     this.color = color;
   }
   draw() {
+    const ctx = new Context().getCtx();
     const circle = new Path2D();
     circle.arc(this.x, this.y, BALL_RAD, 0, 2 * Math.PI);
     ctx.fillStyle = this.color;
@@ -19,6 +18,4 @@ class Ball {
   }
 }
 
-const ball = (x, y, color) => new Ball(x, y, color).draw();
-
-export default ball;
+export default Ball;

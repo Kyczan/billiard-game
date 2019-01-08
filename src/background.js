@@ -1,8 +1,6 @@
-import context from './context';
+import Context from './context';
 import { POOL_WIDTH, POOL_HEIGHT } from './constants';
 import BgImage from '../assets/pool.png';
-
-const ctx = context('pool');
 
 class Background {
   constructor() {
@@ -11,12 +9,11 @@ class Background {
   }
 
   setBackground() {
+    const ctx = new Context('pool').getCtx();
     this.background.onload = () => {
       ctx.drawImage(this.background, 0, 0, POOL_WIDTH, POOL_HEIGHT);
     };
   }
 }
 
-const background = () => new Background().setBackground();
-
-export default background;
+export default Background;

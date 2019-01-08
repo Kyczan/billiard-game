@@ -1,8 +1,6 @@
-import context from './context';
-import background from './background';
-import balls from './balls';
+import Background from './background';
+import Balls from './balls';
 import './index.css';
 
-context();
-background();
-balls();
+new Background().setBackground();
+new Balls().setBalls();

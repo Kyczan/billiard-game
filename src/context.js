@@ -8,6 +8,4 @@ class Context {
   }
 }
 
-const context = canvas => new Context(canvas).getCtx();
-
-export default context;
+export default Context;

@@ -1,4 +1,4 @@
-import ball from './ball';
+import Ball from './ball';
 import { BALL_RAD, GAME_WIDTH, GAME_HEIGHT } from './constants';
 
 class Balls {
@@ -64,11 +64,9 @@ class Balls {
   setBalls() {
     const ballPos = this.generatePositions();
     ballPos.forEach(b => {
-      ball(b.x, b.y, b.color);
+      new Ball(b.x, b.y, b.color).draw();
     });
   }
 }
 
-const balls = () => new Balls().setBalls();
-
-export default balls;
+export default Balls;
