@@ -1,4 +1,4 @@
-import Context from './context';
+import Canvas from './canvas';
 import { POOL_WIDTH, POOL_HEIGHT } from './constants';
 import BgImage from '../assets/pool.png';
 
@@ -9,7 +9,9 @@ class Background {
   }
 
   setBackground() {
-    const ctx = new Context('pool').getCtx();
+    const canvas = new Canvas('pool');
+    const ctx = canvas.getCtx();
+    canvas.setDimensions(POOL_WIDTH, POOL_HEIGHT);
     this.background.onload = () => {
       ctx.drawImage(this.background, 0, 0, POOL_WIDTH, POOL_HEIGHT);
     };

@@ -63,9 +63,12 @@ class Balls {
 
   setBalls() {
     const ballPos = this.generatePositions();
+    const balls = [];
     ballPos.forEach(b => {
-      new Ball(b.x, b.y, b.color).draw();
+      const ball = new Ball({ x: b.x, y: b.y }, { x: 0, y: 0 }, b.color);
+      balls.push(ball);
     });
+    return balls;
   }
 }
 
