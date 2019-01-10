@@ -1,5 +1,5 @@
 class Canvas {
-  constructor(canvas = 'game') {
+  constructor(canvas) {
     this.canvas = document.getElementById(canvas);
     this.context = this.canvas.getContext('2d');
     this.context.imageSmoothingEnabled = false;

@@ -2,6 +2,9 @@ import Ball from './ball';
 import { BALL_RAD, GAME_WIDTH, GAME_HEIGHT } from './constants';
 
 class Balls {
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
   generatePositions() {
     // ball radius
     const ball_r = BALL_RAD;
@@ -65,7 +68,12 @@ class Balls {
     const ballPos = this.generatePositions();
     const balls = [];
     ballPos.forEach(b => {
-      const ball = new Ball({ x: b.x, y: b.y }, { x: 0, y: 0 }, b.color);
+      const ball = new Ball(
+        this.ctx,
+        { x: b.x, y: b.y },
+        { x: 0, y: 0 },
+        b.color
+      );
       balls.push(ball);
     });
     return balls;

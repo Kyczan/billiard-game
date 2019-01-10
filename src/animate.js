@@ -1,7 +1,9 @@
-import Canvas from './canvas';
 import { GAME_WIDTH, GAME_HEIGHT } from './constants';
 
 class Animate {
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
   startAnimation = balls => {
     this.draw(balls);
     window.requestAnimationFrame(() => this.startAnimation(balls));
@@ -17,8 +19,7 @@ class Animate {
   }
 
   clear() {
-    const ctx = new Canvas().getCtx();
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    this.ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
   }
 }
 

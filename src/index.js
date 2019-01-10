@@ -1,15 +1,13 @@
 import Animate from './animate';
-import Background from './background';
 import Balls from './balls';
-import Canvas from './canvas';
-import { GAME_WIDTH, GAME_HEIGHT } from './constants';
+import game from './canvas/game';
+import './canvas/pool';
 import './index.css';
 
 function run() {
-  new Background().setBackground();
-  new Canvas().setDimensions(GAME_WIDTH, GAME_HEIGHT);
-  const balls = new Balls().setBalls();
-  new Animate().startAnimation(balls);
+  const ctx = game.getCtx();
+  const balls = new Balls(ctx).setBalls();
+  new Animate(ctx).startAnimation(balls);
 }
 
 run();
