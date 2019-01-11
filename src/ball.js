@@ -13,11 +13,15 @@ class Ball {
     img.src = this.color;
     this.ctx.drawImage(
       img,
-      this.position.x - BALL_RAD - 5,
-      this.position.y - BALL_RAD - 5,
-      BALL_RAD * 2 + 10,
-      BALL_RAD * 2 + 10
+      this.position.x - (BALL_RAD * 3 - 5) / 2,
+      this.position.y - (BALL_RAD * 3 - 5) / 2,
+      BALL_RAD * 3 - 5,
+      BALL_RAD * 3 - 5
     );
+    // const circle = new Path2D();
+    // circle.arc(this.position.x, this.position.y, BALL_RAD, 0, 2 * Math.PI);
+    // this.ctx.strokeStyle = 'black';
+    // this.ctx.stroke(circle);
   }
 
   move() {
