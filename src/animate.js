@@ -12,9 +12,10 @@ class Animate {
   draw(balls) {
     this.clear();
     balls.forEach(ball => {
+      ball.detectWallCollision();
       ball.draw();
-      ball.setSpeed((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5);
       ball.move();
+      ball.detectBallCollision(balls);
     });
   }
 
