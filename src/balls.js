@@ -77,7 +77,7 @@ class Balls {
       );
       balls.push(ball);
     });
-    balls[balls.length - 1].setSpeed(3, 0.3);
+    balls[balls.length - 1].setSpeed(10, 0);
     return balls;
   }
 }

@@ -28,10 +28,10 @@ class Ball {
     this.position.x += this.speed.x;
     this.position.y += this.speed.y;
     this.setSpeed(
-      Math.abs(this.speed.x * this.slowFactor) < 0.05
+      Math.abs(this.speed.x * this.slowFactor) < 0.1
         ? 0
         : this.speed.x * this.slowFactor,
-      Math.abs(this.speed.y * this.slowFactor) < 0.05
+      Math.abs(this.speed.y * this.slowFactor) < 0.1
         ? 0
         : this.speed.y * this.slowFactor
     );
@@ -58,32 +58,27 @@ class Ball {
     const s2 = b.speed;
     const p1 = this.position;
     const p2 = b.position;
+    let power =
+      Math.abs(s1.x) + Math.abs(s1.y) + Math.abs(s2.x) + Math.abs(s2.y);
+    power = power * 0.00482;
 
-    const pDifference = { x: p2.x - p1.x, y: p2.y - p1.y };
-    const pDistance = Math.sqrt(
-      pDifference.x * pDifference.x + pDifference.y * pDifference.y
-    );
-    const pNormal = {
-      x: pDifference.x / pDistance,
-      y: pDifference.y / pDistance
+    const opposite = p1.y - p2.y;
+    const adjacent = p1.x - p2.x;
+    const rotation = Math.atan2(opposite, adjacent);
+
+    const speed2 = {
+      x: 90 * Math.cos(rotation + Math.PI) * power,
+      y: 90 * Math.sin(rotation + Math.PI) * power
     };
+    b.speed.x = (b.speed.x + speed2.x) * 0.97;
+    b.speed.y = (b.speed.y + speed2.y) * 0.97;
 
-    const sDifference = { x: s2.x - s1.x, y: s2.y - s1.y };
-    const sDistance = Math.sqrt(
-      sDifference.x * sDifference.x + sDifference.y * sDifference.y
-    );
-    const sNormal = {
-      x: sDifference.x / sDistance,
-      y: sDifference.y / sDistance
+    const speed1 = {
+      x: 90 * Math.cos(rotation) * power,
+      y: 90 * Math.sin(rotation) * power
     };
-
-    const dotProduct = sNormal.x * pNormal.x + sNormal.y * pNormal.y;
-
-    let v1 = [s1.x - sNormal.x * dotProduct, s1.y - sNormal.y * dotProduct];
-    let v2 = [s2.x + sNormal.x * dotProduct, s2.y + sNormal.y * dotProduct];
-
-    this.setSpeed(...v1);
-    // b.setSpeed(...v2);
+    this.speed.x = (this.speed.x + speed1.x) * 0.97;
+    this.speed.y = (this.speed.y + speed1.y) * 0.97;
   }
 
   detectBallCollision(balls) {
