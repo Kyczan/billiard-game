@@ -12,7 +12,7 @@ class Ball {
     this.speed = speed;
     this.color = color;
     this.r2 = 4 * BALL_RAD * BALL_RAD;
-    this.slowFactor = 0.995;
+    this.slowFactor = 0.993;
   }
 
   draw() {
@@ -54,6 +54,7 @@ class Ball {
   }
 
   calcNewSpeed(b) {
+    const friction = 0.87;
     const s1 = this.speed;
     const s2 = b.speed;
     const p1 = this.position;
@@ -70,15 +71,15 @@ class Ball {
       x: 90 * Math.cos(rotation + Math.PI) * power,
       y: 90 * Math.sin(rotation + Math.PI) * power
     };
-    b.speed.x = (b.speed.x + speed2.x) * 0.97;
-    b.speed.y = (b.speed.y + speed2.y) * 0.97;
+    b.speed.x = (b.speed.x + speed2.x) * friction;
+    b.speed.y = (b.speed.y + speed2.y) * friction;
 
     const speed1 = {
       x: 90 * Math.cos(rotation) * power,
       y: 90 * Math.sin(rotation) * power
     };
-    this.speed.x = (this.speed.x + speed1.x) * 0.97;
-    this.speed.y = (this.speed.y + speed1.y) * 0.97;
+    this.speed.x = (this.speed.x + speed1.x) * friction;
+    this.speed.y = (this.speed.y + speed1.y) * friction;
   }
 
   detectBallCollision(balls) {

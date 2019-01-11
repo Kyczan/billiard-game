@@ -71,13 +71,12 @@ class Balls {
       const ball = new Ball(
         this.ctx,
         { x: b.x, y: b.y },
-        // { x: (Math.random() - 0.5) * 5, y: (Math.random() - 0.5) * 5 },
         { x: 0, y: 0 },
         b.color
       );
       balls.push(ball);
     });
-    balls[balls.length - 1].setSpeed(10, 0);
+    balls[balls.length - 1].setSpeed(10, 1.5);
     return balls;
   }
 }
