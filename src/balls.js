@@ -1,5 +1,9 @@
 import Ball from './ball';
 import { BALL_RAD, GAME_WIDTH, GAME_HEIGHT } from './constants';
+import BallWhite from '../assets/ball_white.png';
+import BallBlack from '../assets/ball_black.png';
+import BallYellow from '../assets/ball_yellow.png';
+import BallRed from '../assets/ball_red.png';
 
 class Balls {
   constructor(ctx) {
@@ -17,21 +21,21 @@ class Balls {
     const start_y = GAME_HEIGHT * 0.5 + (Math.random() - 0.5) * 10;
 
     const colors = [
-      'red',
-      'blue',
-      'yellow',
-      'orange',
-      'black',
-      'green',
-      'purple',
-      'red',
-      'blue',
-      'black',
-      'yellow',
-      'orange',
-      'green',
-      'purple',
-      'red'
+      BallYellow,
+      BallRed,
+      BallYellow,
+      BallRed,
+      BallBlack,
+      BallYellow,
+      BallRed,
+      BallYellow,
+      BallRed,
+      BallYellow,
+      BallRed,
+      BallYellow,
+      BallRed,
+      BallYellow,
+      BallRed
     ];
 
     const ballsPos = [];
@@ -58,7 +62,7 @@ class Balls {
     ballsPos.push({
       x: GAME_WIDTH * 0.25 - Math.random() * 10,
       y: start_y + (Math.random() - 0.5) * 5,
-      color: 'white'
+      color: BallWhite
     });
 
     return ballsPos;

@@ -1,39 +1,32 @@
 import { BALL_RAD, GAME_WIDTH, GAME_HEIGHT } from './constants';
 
 class Ball {
-  constructor(
-    ctx,
-    position = { x: 0, y: 0 },
-    speed = { x: 0, y: 0 },
-    color = 'white'
-  ) {
+  constructor(ctx, position = { x: 0, y: 0 }, speed = { x: 0, y: 0 }, color) {
     this.ctx = ctx;
     this.position = position;
     this.speed = speed;
     this.color = color;
-    this.r2 = 4 * BALL_RAD * BALL_RAD;
-    this.slowFactor = 0.993;
   }
 
   draw() {
-    const circle = new Path2D();
-    circle.arc(this.position.x, this.position.y, BALL_RAD, 0, 2 * Math.PI);
-    this.ctx.fillStyle = this.color;
-    this.ctx.fill(circle);
-    this.ctx.strokeStyle = 'black';
-    this.ctx.stroke(circle);
+    const img = new Image();
+    img.src = this.color;
+    this.ctx.drawImage(
+      img,
+      this.position.x - BALL_RAD - 5,
+      this.position.y - BALL_RAD - 5,
+      BALL_RAD * 2 + 10,
+      BALL_RAD * 2 + 10
+    );
   }
 
   move() {
+    const slowFactor = 0.993;
     this.position.x += this.speed.x;
     this.position.y += this.speed.y;
     this.setSpeed(
-      Math.abs(this.speed.x * this.slowFactor) < 0.1
-        ? 0
-        : this.speed.x * this.slowFactor,
-      Math.abs(this.speed.y * this.slowFactor) < 0.1
-        ? 0
-        : this.speed.y * this.slowFactor
+      Math.abs(this.speed.x * slowFactor) < 0.1 ? 0 : this.speed.x * slowFactor,
+      Math.abs(this.speed.y * slowFactor) < 0.1 ? 0 : this.speed.y * slowFactor
     );
   }
 
@@ -54,11 +47,14 @@ class Ball {
   }
 
   calcNewSpeed(b) {
+    // Warning!
+    // Hardcore math included!
     const friction = 0.87;
     const s1 = this.speed;
     const s2 = b.speed;
     const p1 = this.position;
     const p2 = b.position;
+
     let power =
       Math.abs(s1.x) + Math.abs(s1.y) + Math.abs(s2.x) + Math.abs(s2.y);
     power = power * 0.00482;
@@ -86,6 +82,7 @@ class Ball {
     // check if length between two centres of balls
     // is less than 2 * radius
     const { x, y } = this.position;
+    const r2 = 4 * BALL_RAD * BALL_RAD;
     for (let i = 0; i < balls.length; i++) {
       let b = balls[i];
       if (b === this) continue;
@@ -94,7 +91,7 @@ class Ball {
       let yy = y - by;
       let d2 = xx * xx + yy * yy;
       if (
-        d2 <= this.r2 &&
+        d2 <= r2 &&
         (this.speed.x !== 0 ||
           this.speed.y !== 0 ||
           b.speed.x !== 0 ||
